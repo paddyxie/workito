@@ -1,0 +1,71 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id 'org.springframework.boot' version '2.6.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+}
+
+allprojects {
+
+    group 'org.workito'
+    version '1.0.0-SNAPSHOT'
+
+    repositories {
+        maven {
+            allowInsecureProtocol true
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+//        mavenCentral()
+    }
+
+}
+
+
+subprojects {
+
+    // not for Web/JS project
+    if (project.name == "workito-web") return
+
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+//    sourceCompatibility = JavaVersion.VERSION_1_8
+//    targetCompatibility = JavaVersion.VERSION_1_8
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom(SpringBootPlugin.BOM_COORDINATES)
+        }
+    }
+
+    dependencies {
+
+        implementation 'org.slf4j:slf4j-api:1.7.36'
+
+        compileOnly 'org.projectlombok:lombok:1.18.22'
+        annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+        testCompileOnly 'org.projectlombok:lombok:1.18.22'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+project(":workito-app") {
+    tasks.register("CopyWebApp") {
+        dependsOn ':workito-web:yarn_build'
+        doLast {
+            println 'done'
+        }
+    }
+}

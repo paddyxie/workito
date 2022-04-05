@@ -1,0 +1,3 @@
+rootProject.name = 'workito'
+
+include 'workito-app', 'workito-domain', 'workito-web'

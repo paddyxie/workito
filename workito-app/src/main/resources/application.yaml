@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: workito
+  profiles:
+    active: local
+  datasource:
+    url: "jdbc:mysql://localhost:3306/workito?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
+    username: summer
+    password: 12345678
+  jpa:
+    database: MYSQL
+
+  devtools:
+    restart:
+      exclude: "static/**,public/**"
+      enabled: false
+
+
+logging:
+  level:
+      web: DEBUG
+  pattern:
+    console: "%clr(%-5level) %clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr([%thread]){magenta} %clr(%logger{36}){cyan} - %msg%n"
+#    file: "%clr(%-5level) %clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr([%thread]){magenta} %clr(%logger{36}){cyan} - %msg%n"

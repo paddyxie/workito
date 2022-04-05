@@ -1,0 +1,11 @@
+plugins {
+    id 'base'
+    id "com.github.node-gradle.node" version "3.2.1"
+}
+
+node {
+
+}
+
+// hook "yarn build" into gradle build flow
+assemble.dependsOn(yarn_build)

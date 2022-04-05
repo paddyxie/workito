@@ -1,0 +1,38 @@
+plugins {
+    id 'base'
+    id "org.springframework.boot"
+}
+
+dependencies {
+
+    implementation project(":workito-domain")
+    runtimeOnly project(":workito-web")
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'org.workito.Application'
+}
+
+task copyWebApp(type: Copy) {
+//    dependsOn ":workito-web:build"
+
+    from project(':workito-web').getBuildDir()
+    into project.buildDir.path + "/resources/main/static"
+}
+
+bootJar.dependsOn(copyWebApp)
