@@ -8,4 +8,4 @@ node {
 }
 
 // hook "yarn build" into gradle build flow
-assemble.dependsOn(yarn_build)
+assemble.dependsOn(yarn, yarn_build)
