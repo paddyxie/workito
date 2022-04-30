@@ -1,0 +1,79 @@
+{
+  "code": "200",
+  "payload": {
+    "projectKey": "FLAG",
+    "projectName": "Flag Service",
+    "description": "",
+    "wbs": [
+      {
+        "key": 1,
+        "category": "Problem & Scope",
+        "description": "Discuss with PO/SH for primary problem and solution scope",
+        "owner": {
+          "userId": "mifu",
+          "userName": "Minchao"
+        },
+        "status": "WIP",
+        "estimation": {
+          "frontend": 0,
+          "backend": 5
+        },
+        "children": [
+          {
+            "key": 2,
+            "summary": "Flag I18N Solution Scope",
+            "description": "Define Flag Service globalization solution scope",
+            "owner": {
+              "userId": "mifu",
+              "userName": "Minchao"
+            },
+            "status": "TODO",
+            "estimation": {
+              "frontend": 0,
+              "backend": 1
+            },
+            "schedule": {
+              "W1": "",
+              "W2": "TODO",
+              "W3": "TODO",
+              "W4": "TODO",
+              "W5": "",
+              "W6": "",
+              "W7": "",
+              "W8": "",
+              "W9": "",
+              "W10": "",
+              "W11": "",
+              "W12": "",
+              "W13": ""
+            }
+          }
+        ]
+      },
+      {
+        "key": 10,
+        "category": "Update SDK for i18n",
+        "owner": {
+          "userId": "mifu",
+          "userName": "Minchao"
+        },
+        "status": "TODO",
+        "estimation": {
+          "frontend": 0,
+          "backend": 5
+        },
+        "children": [
+          {
+            "key": 11,
+            "summary": "Add VDC and CMDB role config",
+            "status": "TODO",
+            "estimation": {
+              "frontend": 0,
+              "backend": 5
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
