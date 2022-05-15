@@ -1,151 +1,14 @@
 import React from 'react';
-import {Button, Form, Select, Space, Table, Tag} from 'antd';
-import {NodeCollapseOutlined, NodeExpandOutlined} from '@ant-design/icons';
+import {Button, Col, Form, Row, Select, Space, Table, Tag} from 'antd';
+import {NodeCollapseOutlined, NodeExpandOutlined, PlusCircleOutlined} from '@ant-design/icons';
+import columns from '../../test/v1/tables/project-detail.json'
 import project from '../../test/v1/projects/data.json'
 
-const columns = [
-  {
-    title: 'Category',
-    dataIndex: 'category',
-    width: 200,
-    fixed: 'left'
-  },
-  {
-    title: 'Summary',
-    dataIndex: 'summary',
-    width: 300,
-    fixed: 'left'
-  },
-  {
-    title: 'Owner',
-    dataIndex: ['owner', 'userName'],
-    key: ['owner', 'userId'],
-    width: 100,
-    filters: [
-      {
-        text: 'Minchao',
-        value: 'mifu',
-      },
-      {
-        text: 'Qingwei',
-        value: 'qingwei.song',
-      },
-    ]
-  },
-  {
-    title: 'Estimation',
-    children: [
-      {
-        title: 'FE',
-        dataIndex: 'estimatedFe',
-        width: 50,
-        align: 'center'
-      },
-      {
-        title: 'BE',
-        dataIndex: 'estimatedBe',
-        width: 50,
-        align: 'center'
-      }
-    ]
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    width: 80,
-    align: 'center',
-    render: text => {
+const items = project.payload.wbs;
 
-      let color = text == 'WIP' ? 'processing' : 'success';
-
-      return (
-        <Tag color={color} key={text}>
-          {text.toUpperCase()}
-        </Tag>
-      );
-    }
-  },
-  {
-    title: 'Last Update',
-    children: [
-      {
-        title: 'Time',
-        dataIndex: 'updateTime',
-        width: 50,
-        align: 'center'
-      },
-      {
-        title: 'Update',
-        dataIndex: 'updateContent',
-        align: 'left'
-      }
-    ]
-  }
-];
-
-for (let i = 0; i < 13; i++) {
-
-  columns.push({
-    title: 'W' + (i + 1),
-    width: 50,
-    align: 'center',
-    dataIndex: ['schedule', 'W' + (i + 1)],
-    responsive: ['lg'],
-    onCell: (record, rowIndex) => ({
-      onClick: () => {
-
-        let status = record.schedule['W' + (i + 1)];
-        if (status === 'TODO') {
-          record.schedule['W' + (i + 1)] = '';
-        } else {
-          record.schedule['W' + (i + 1)] = 'TODO';
-        }
-        console.log(record.schedule)
-      }
-    }),
-    render: text => {
-
-      console.log(text)
-      return (
-        <div style={{
-          backgroundColor: text === 'TODO' && '#24b39b'
-        }}>
-          &nbsp;
-        </div>
-      );
-    }
-  })
-}
-
-
-const data = project.payload.wbs;
-console.log(project.payload.wbs);
-//for (let i = 0; i < 100; i++) {
-//  data.push({
-//    key: i,
-//    category: 'Problem & Scope',
-//    summary: 'Work with PO for Scope Definition',
-//    description: 'Currently we\'ve no idea about the scope yet at all',
-//    owner: 'mifu',
-//    ownerName: 'Minchao',
-//    status: 'WIP',
-//    estimatedFe: 0,
-//    estimatedBe: i,
-//    children: [
-//        {
-//          key: i*100,
-//          summary: 'Flag I18N Solution Scope',
-//          owner: 'mifu',
-//          ownerName: 'Minchao',
-//          status:'DONE',
-//          estimatedFe: 0,
-//          estimatedBe: 1,
-//        }
-//    ]
-//  });
-//}
 
 class ProjectDetail extends React.Component {
+
   state = {
     bordered: true,
     loading: false,
@@ -153,6 +16,8 @@ class ProjectDetail extends React.Component {
     showHeader: true,
     rowSelection: undefined,
     hasData: true,
+    columns: columns,
+    data: items,
     bottom: 'bottomRight',
     xScroll: 'scroll',
     ellipsis: false,
@@ -179,12 +44,56 @@ class ProjectDetail extends React.Component {
     this.setState({hasData});
   };
 
+  toggle = column => {
+    return (record, rowIndex) => ({
+      onClick: () => {
+        let schedule = record.schedule || (record.schedule = []);
+
+        let status = schedule[column.title];
+        if (status === 'TODO') {
+          schedule[column.title] = '';
+        } else {
+          schedule[column.title] = 'TODO';
+        }
+
+        this.setState({...this.state});
+      }
+    })
+  }
+
 //  const { Option } = Select;
 
   render() {
     const {...state} = this.state;
 
-    const tableColumns = columns.map(item => ({...item, ellipsis: state.ellipsis}));
+    const tableColumns = state.columns.map(column => {
+        column.ellipsis = state.ellipsis;
+
+        if (column.title === 'Status') {
+          column.render = text => {
+
+            let color = text === 'WIP' ? 'processing' : 'success';
+
+            return (
+              <Tag color={color} key={text}>
+                {text.toUpperCase()}
+              </Tag>
+            );
+          }
+        }
+
+        if (column.title.startsWith("W")) {
+          column.render = text => {
+            return (
+              <div style={{backgroundColor: text === 'TODO' ? '' : '#24b39b'}}> &nbsp;</div>
+            );
+          }
+          column.onCell = this.toggle(column);
+
+        }
+        return column;
+      }
+    )
 
     return (
       <>
@@ -213,23 +122,36 @@ class ProjectDetail extends React.Component {
             </Select>
           </Form.Item>
         </Form>
-        <Space size={2}>
-          <Button
-            icon={<NodeCollapseOutlined/>}
-            onClick={() => {
-            }}
-          />
-          <Button
-            icon={<NodeExpandOutlined/>}
-            onClick={() => {
-            }}
-          />
-        </Space>
+        <Row style={{padding:"5px 5px"}}>
+          <Col span={12}>
+            <Space size={2}>
+              <Button
+                icon={<NodeCollapseOutlined/>}
+                onClick={() => {
+                }}
+              />
+              <Button
+                icon={<NodeExpandOutlined/>}
+                onClick={() => {
+                }}
+              />
+            </Space>
+          </Col>
+          <Col span={12} style={{display:'flex', justifyContent:'flex-end'}}>
+            <Space size={2} >
+              <Button type='primary'
+                icon={<PlusCircleOutlined />}
+                onClick={() => {
+                }}
+              >Create</Button>
+            </Space>
+          </Col>
+        </Row>
         <Table
           {...this.state}
           pagination={{position: 'bottom', size: 'middle'}}
           columns={tableColumns}
-          dataSource={state.hasData ? data : null}
+          dataSource={state.hasData ? state.data : null}
           //          onRow={(record, rowIndex) => {
           //            return {
           //              onClick: event=> {

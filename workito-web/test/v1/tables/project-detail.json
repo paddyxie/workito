@@ -1,0 +1,231 @@
+[
+  {
+    "title": "Category",
+    "dataIndex": "category",
+    "width": 200,
+    "fixed": "left"
+  },
+  {
+    "title": "Summary",
+    "dataIndex": "summary",
+    "width": 300,
+    "fixed": "left"
+  },
+  {
+    "title": "Owner",
+    "dataIndex": [
+      "owner",
+      "userName"
+    ],
+    "key": [
+      "owner",
+      "userId"
+    ],
+    "width": 100,
+    "filters": [
+      {
+        "text": "Minchao",
+        "value": "mifu"
+      },
+      {
+        "text": "Qingwei",
+        "value": "qingwei.song"
+      }
+    ]
+  },
+  {
+    "title": "Estimation",
+    "children": [
+      {
+        "title": "FE",
+        "dataIndex": "estimatedFe",
+        "width": 50,
+        "align": "center"
+      },
+      {
+        "title": "BE",
+        "dataIndex": "estimatedBe",
+        "width": 50,
+        "align": "center"
+      }
+    ]
+  },
+  {
+    "title": "Status",
+    "dataIndex": "status",
+    "width": 80,
+    "align": "center"
+  },
+  {
+    "title": "Last Update",
+    "children": [
+      {
+        "title": "Time",
+        "dataIndex": "updateTime",
+        "width": 50,
+        "align": "center"
+      },
+      {
+        "title": "Update",
+        "dataIndex": "updateContent",
+        "align": "left"
+      }
+    ]
+  },
+  {
+    "title": "W1",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W1"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W2",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W2"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W3",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W3"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W4",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W4"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W5",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W5"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W6",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W6"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W7",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W7"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W8",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W8"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W9",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W9"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W10",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W10"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W11",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W11"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W12",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W12"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  },
+  {
+    "title": "W13",
+    "width": 50,
+    "align": "center",
+    "dataIndex": [
+      "schedule",
+      "W13"
+    ],
+    "responsive": [
+      "lg"
+    ]
+  }
+]

@@ -12,6 +12,7 @@ import MyNotes from './my/MyNotes';
 
 // Project
 import ProjectDetail from './project/ProjectDetail';
+import RetrospectiveBoard from "./scrum/RetrospectiveBoard";
 
 class AppRoute extends React.Component {
 
@@ -26,6 +27,9 @@ class AppRoute extends React.Component {
 
           <Route path="/works" element={<MyWorks/>}>
             <Route path=":workId" element={<MyNotes/>}/>
+          </Route>
+
+          <Route path="/scrum" element={<RetrospectiveBoard/>}>
           </Route>
         </Route>
       </Routes>

@@ -29,7 +29,7 @@ springBoot {
 }
 
 task copyWebApp(type: Copy) {
-//    dependsOn ":workito-web:build"
+    dependsOn ":workito-web:build"
 
     from project(':workito-web').getBuildDir()
     into project.buildDir.path + "/resources/main/static"

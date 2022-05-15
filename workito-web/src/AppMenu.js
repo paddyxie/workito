@@ -51,7 +51,7 @@ class AppMenu extends React.Component {
           Project<Link to="/project"/>
         </Menu.Item>
         <Menu.Item key="4" icon={<RocketOutlined/>}>
-          Scrum
+          Scrum<Link to="/scrum"/>
         </Menu.Item>
         <SubMenu key="sub2" icon={<TeamOutlined/>} title="Team">
           <Menu.Item key="6" icon={<UserOutlined/>}>Member</Menu.Item>
